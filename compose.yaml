@@ -1,0 +1,6 @@
+﻿services:
+  bookstoremanager.presentation:
+    image: bookstoremanager.presentation
+    build:
+      context: .
+      dockerfile: BookStoreManager.Presentation/Dockerfile
