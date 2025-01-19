@@ -1,6 +1,6 @@
 namespace BookStoreManager.Persistence.Entities;
 
-internal class BookUserEntity:UserEntity
+public class BookUserEntity:UserEntity
 {
     
 }

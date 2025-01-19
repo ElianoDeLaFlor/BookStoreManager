@@ -1,11 +1,11 @@
 namespace BookStoreManager.Persistence.Entities;
 
-internal class BookEntity
+public class BookEntity
 {
-    private int Id { get; set; }
-    private string Title { get; set; }
-    private string Author { get; set; }
-    private string Description { get; set; }
-    private int Price { get; set; }
-    private string ISBN { get; set; }
+    public int Id { get; set; }
+    public string Title { get; set; }
+    public string Author { get; set; }
+    public string Description { get; set; }
+    public int Price { get; set; }
+    public string ISBN { get; set; }
 }

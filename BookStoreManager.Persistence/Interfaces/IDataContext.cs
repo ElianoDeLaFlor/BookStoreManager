@@ -1,5 +1,11 @@
+using BookStoreManager.Persistence.Entities;
+using Microsoft.EntityFrameworkCore;
+
 namespace BookStoreManager.Persistence.RepositoriesInterfaces;
 
-public class IDataContext
+interface IDataContext
 {
+    DbSet<BookEntity> Books { get; }
+    DbSet<UserEntity> Users { get; }
+    DbSet<BookUserEntity> BookUsers { get; }
 }
