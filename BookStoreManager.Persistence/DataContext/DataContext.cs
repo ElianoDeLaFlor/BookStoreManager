@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BookStoreManager.Persistence.DataContext;
 
-public class DataContext:DbContext, IDataContext
+internal class DataContext:DbContext, IDataContext
 {
     public DbSet<BookEntity> Books { get; }
     public DbSet<UserEntity> Users { get; }
