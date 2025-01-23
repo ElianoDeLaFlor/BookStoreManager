@@ -9,5 +9,9 @@ public class EntityMapperProfile: Profile
     public EntityMapperProfile()
     {
         CreateMap<Book, BookEntity>();
-        CreateMap<BookEntity, Book>();}
+        CreateMap<BookEntity, Book>();
+        CreateMap<IEnumerable<BookEntity>, IEnumerable<Book>>();
+        CreateMap<IEnumerable<Book>, IEnumerable<BookEntity>>();
+        
+    }
 }
