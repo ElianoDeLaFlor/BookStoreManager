@@ -1,3 +1,6 @@
+using BookStoreManager.Domain.Models;
+using BookStoreManager.Persistence;
+
 namespace BookStoreManager.Presentation;
 
 public class Program
@@ -11,6 +14,13 @@ public class Program
         builder.Services.AddControllers();
         // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
         builder.Services.AddOpenApi();
+        builder.Services.AddOptions<DbConfigOptions>().BindConfiguration("DbConfig");
+        builder.Services.Configure<DbConfigOptions>(
+            builder.Configuration.GetSection("DbConfig")
+        );
+
+        
+        builder.Services.AddPersistenceServices(builder.Configuration);
 
         var app = builder.Build();
 
