@@ -3,10 +3,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BookStoreManager.Persistence.RepositoriesInterfaces;
 
-interface IDataContext
+public interface IDataContext
 {
-    DbSet<BookEntity> Books { get; }
-    DbSet<UserEntity> Users { get; }
-    DbSet<BookUserEntity> BookUsers { get; }
+    DbSet<BookEntity> Books { get; set; }
+    DbSet<UserEntity> Users { get; set; }
+    DbSet<BookUserEntity> BookUsers { get; set; }
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 }
