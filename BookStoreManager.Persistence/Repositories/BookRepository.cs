@@ -72,7 +72,8 @@ internal class BookRepository:IBookRepository
         var response = new ApiResponse<Book?>();
         try
         {
-            var book = await _dataContext.Books.FirstOrDefaultAsync(cancellationToken);
+            var book =
+                await (from item in _dataContext.Books where item.Id == bookId select item).SingleAsync(cancellationToken);
             var result = _mapper.Map<Book?>(book);
             response.Data = result;
             response.Message="Success";
