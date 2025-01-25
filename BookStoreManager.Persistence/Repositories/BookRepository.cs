@@ -58,18 +58,32 @@ internal class BookRepository:IBookRepository
         return response;
     }
 
-    public async Task<ApiResponse<Book>> UpdateAsync(BookEntity book, CancellationToken cancellationToken = default)
+    public async Task<ApiResponse<Book>> UpdateAsync(Book TEnity, CancellationToken cancellationToken = default)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<ApiResponse<Book>> DeleteAsync(Guid bookId, CancellationToken cancellationToken = default)
+    public async Task<ApiResponse<Book>> DeleteAsync(int entityId, CancellationToken cancellationToken = default)
     {
         throw new NotImplementedException();
     }
-
-    public async Task<ApiResponse<Book>> GetAsync(int bookId, CancellationToken cancellationToken = default)
+    public async Task<ApiResponse<Book?>> GetAsync(int bookId, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        var response = new ApiResponse<Book?>();
+        try
+        {
+            var book = await _dataContext.Books.FirstOrDefaultAsync(cancellationToken);
+            var result = _mapper.Map<Book?>(book);
+            response.Data = result;
+            response.Message="Success";
+            response.Success = true;
+        }
+        catch (Exception e)
+        {
+            response.Data = null;
+            response.Message = e.Message;
+            response.Success = false;
+        }
+        return response;
     }
 }
