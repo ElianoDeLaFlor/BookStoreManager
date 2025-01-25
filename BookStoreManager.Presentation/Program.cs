@@ -1,5 +1,6 @@
 using BookStoreManager.Domain.Models;
 using BookStoreManager.Persistence;
+using Microsoft.EntityFrameworkCore;
 
 namespace BookStoreManager.Presentation;
 

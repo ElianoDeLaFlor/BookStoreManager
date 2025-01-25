@@ -1,5 +1,5 @@
 using AutoMapper;
-using BookStoreManager.Persistence.DataContext;
+using BookStoreManager.Persistence.DatabaseContext;
 using BookStoreManager.Persistence.Dtos;
 using BookStoreManager.Persistence.Entities;
 using BookStoreManager.Persistence.Repositories;
@@ -28,8 +28,8 @@ public class BookRepositoryTest
         
         // Seed initial data for tests
         _dataContext.Books.AddRange(
-            new BookEntity { Id = 1, Author = "auteur1", Title = "Titre1" },
-            new BookEntity { Id = 2, Author = "auteur2", Title = "Titre2" }
+            new BookEntity { Id = 1, Author = "auteur1", Title = "Titre1",Description = "Description1",Price = 10,CreateDate = DateTime.Now,IsDeleted = false,ISBN = "ISBN1",LastUpdate = DateTime.Now },
+            new BookEntity { Id = 2, Author = "auteur2", Title = "Titre2" ,Description = "Description2",Price = 20,CreateDate = DateTime.Now,IsDeleted = false,ISBN = "ISBN2",LastUpdate = DateTime.Now }
         );
          //Configure AutoMapper
         var mapperConfiguration = new MapperConfiguration(cfg =>
@@ -55,5 +55,17 @@ public class BookRepositoryTest
         Assert.Equal(1, result.Data?.Id);
         Assert.Equal("auteur1", result.Data?.Author);
         Assert.Equal("Titre1", result.Data?.Title);
+    }
+    
+    [Fact]
+    public async Task GetBookById_ShouldReturnNull()
+    {
+        // Act
+        var result = await _bookRepository.GetAsync(3);
+
+        // Assert
+        Assert.NotNull(result);
+        Assert.False(result.Success);
+        Assert.Null(result.Data);
     }
 }
