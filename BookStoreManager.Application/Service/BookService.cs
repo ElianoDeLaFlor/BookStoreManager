@@ -15,7 +15,7 @@ public class BookService:IBookService
         throw new NotImplementedException();
     }
 
-    public async Task<ApiResponse<Book>> DeleteAsync(Guid bookId, CancellationToken cancellationToken = default)
+    public async Task<ApiResponse<Book>> DeleteAsync(int entityId, CancellationToken cancellationToken = default)
     {
         throw new NotImplementedException();
     }
