@@ -1,11 +1,11 @@
 using BookStoreManager.Domain.Models;
+using BookStoreManager.Persistence.DatabaseContext;
 using BookStoreManager.Persistence.Dtos;
 using BookStoreManager.Persistence.RepositoriesInterfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
-using DbContext=BookStoreManager.Persistence.DataContext.DataContext;
 
 
 namespace BookStoreManager.Persistence;
@@ -18,7 +18,7 @@ public static class PersistenceServiceRegistration
         
         // Register DbContext with dependency injection
         
-        services.AddDbContext<DbContext>((serviceProvider, options) =>
+        services.AddDbContext<DataContext>((serviceProvider, options) =>
         {
             var dbSettings = serviceProvider.GetRequiredService<IOptions<DbConfigOptions>>().Value;
 
@@ -33,7 +33,7 @@ public static class PersistenceServiceRegistration
         });
 
 
-        services.AddScoped<IDataContext, DbContext>();
+        services.AddScoped<IDataContext, DataContext>();
         
         return services;
     }

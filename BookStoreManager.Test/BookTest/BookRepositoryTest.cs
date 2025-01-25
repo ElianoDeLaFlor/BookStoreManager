@@ -29,8 +29,12 @@ public class BookRepositoryTest
         // Seed initial data for tests
         _dataContext.Books.AddRange(
             new BookEntity { Id = 1, Author = "auteur1", Title = "Titre1",Description = "Description1",Price = 10,CreateDate = DateTime.Now,IsDeleted = false,ISBN = "ISBN1",LastUpdate = DateTime.Now },
-            new BookEntity { Id = 2, Author = "auteur2", Title = "Titre2" ,Description = "Description2",Price = 20,CreateDate = DateTime.Now,IsDeleted = false,ISBN = "ISBN2",LastUpdate = DateTime.Now }
+            new BookEntity { Id = 2, Author = "auteur2", Title = "Titre2" ,Description = "Description2",Price = 20,CreateDate = DateTime.Now,IsDeleted = false,ISBN = "ISBN2",LastUpdate = DateTime.Now },
+            new BookEntity {Id = 3, Author = "auteur3", Title = "Titre3" ,Description = "Description3",Price = 30,CreateDate = DateTime.Now,IsDeleted = false,ISBN = "ISBN3",LastUpdate = DateTime.Now },
+            new BookEntity {Id = 4, Author = "auteur4", Title = "Titre4" ,Description = "Description4",Price = 40,CreateDate = DateTime.Now,IsDeleted = false,ISBN = "ISBN4",LastUpdate = DateTime.Now },
+            new BookEntity {Id = 5, Author = "auteur5", Title = "Titre5" ,Description = "Description5",Price = 50,CreateDate = DateTime.Now,IsDeleted = false,ISBN = "ISBN5",LastUpdate = DateTime.Now }
         );
+        
          //Configure AutoMapper
         var mapperConfiguration = new MapperConfiguration(cfg =>
         {
@@ -61,11 +65,36 @@ public class BookRepositoryTest
     public async Task GetBookById_ShouldReturnNull()
     {
         // Act
-        var result = await _bookRepository.GetAsync(3);
-
+        var result = await _bookRepository.GetAsync(10);
         // Assert
         Assert.NotNull(result);
         Assert.False(result.Success);
         Assert.Null(result.Data);
     }
+    
+    [Fact]
+    public async Task DeleteBook_ShouldDeleteBook()
+    {
+        // Act
+        var result = await _bookRepository.DeleteAsync(2);
+        
+        var result2 = await _bookRepository.GetAllAsync();
+        // Assert
+        Assert.NotNull(result);
+        Assert.True(result.Success);
+        Assert.Equal(result2.Data?.Count(), 4);
+    }
+    
+    [Fact]
+    public async Task GetAllBook_ShouldReturnAllBook()
+    {
+        // Act
+        var result = await _bookRepository.GetAllAsync();
+        // Assert
+        Assert.NotNull(result);
+        Assert.True(result.Success);
+        Assert.Equal(result.Data?.Count(), 4);
+    }
+    
+    
 }
